@@ -3,13 +3,13 @@ SDIR = src
 ODIR = src/obj
 LDIR = lib
 
-LIBS = 
+LIBS = -lGL -lGLEW -lGLU -lglut -lglfw
 
 CC = g++
-CFLAGS = -std=c++17 -I$(IDIR) -I$(SDIR)
+CFLAGS = -std=c++17 -I$(IDIR)
 
-_DEPS = Scene.hpp SceneTree.hpp
-_OBJ = main.o Scene.o SceneTree.o
+_DEPS = Scene.hpp SceneTree.hpp GUI.hpp
+_OBJ = main.o Scene.o SceneTree.o GUI.o
 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
@@ -23,4 +23,4 @@ choo-choo: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ ./choo-choo

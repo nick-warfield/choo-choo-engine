@@ -6,18 +6,15 @@
 
 class Scene : public std::enable_shared_from_this<Scene>
 {
-    public:
+	public:
 		Scene();
-        virtual ~Scene(void) = 0;
+		virtual ~Scene(void) = 0;
 
-        // always called before load
-        virtual void preload(void) = 0;
-
-        // when the scene enters tree, called once and only once
-        virtual void load(void) = 0;
-        
-        // when the scene exits, called once and only once
-        virtual void unload(void) = 0;
+		virtual void preload(void) { }
+		virtual void load(void) { }
+		virtual void unload(void) { }
+	
+		virtual void draw(void) { }
 
 		uint id(void);
 		std::weak_ptr<Scene> get(uint);
@@ -26,14 +23,17 @@ class Scene : public std::enable_shared_from_this<Scene>
 		void add(std::shared_ptr<Scene>);
 		void remove(Scene&);
 
-        std::vector<std::weak_ptr<Scene>> getChildren(void);
+		std::vector<std::weak_ptr<Scene>> getChildren(void);
 		std::weak_ptr<Scene> getParent(void);
 
-    private:
+	private:
 		static uint m_nextId;
 		uint m_id;
+
+		bool m_isVisible;
+
 		std::weak_ptr<Scene> m_parent;
-        std::vector<std::shared_ptr<Scene>> m_children;
+		std::vector<std::shared_ptr<Scene>> m_children;
 
 		void setParent(std::weak_ptr<Scene>);
 };
