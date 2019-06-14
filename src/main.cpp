@@ -1,54 +1,46 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-#include <glm/glm.hpp>
-
-#include "Scene.hpp"
-#include "GUI.hpp"
-
-using namespace glm;
+#include <SFML/Graphics.hpp>
 
 int main(void)
 {
-	glewExperimental = true;
-	if (!glfwInit())
-	{
-		fprintf(stderr, "Failed to initialize GLFW\n");
-		return -1;
-	}
+	sf::RenderWindow window;
+	window.create(sf::VideoMode(1, 1), "Float Window");
+	auto dt = sf::VideoMode::getDesktopMode();
 
-	glfwWindowHint(GLFW_SAMPLES, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
+	window.setSize(sf::Vector2u(dt.width * 3 / 5, dt.height * 3 / 5));
+	window.setPosition(sf::Vector2i(dt.width / 2 - window.getSize().x / 2, 
+				dt.height / 2 - window.getSize().y / 2));
+	window.setVerticalSyncEnabled(true);
+	window.setView(sf::View(sf::FloatRect(0, 0,
+					window.getSize().x, window.getSize().y)));
 
-	GLFWwindow* window;
-	window = glfwCreateWindow( 1024, 768, "Tutorial 01", NULL, NULL);
-	if( window == NULL )
-	{
-		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window); // Initialize GLEW
-	glewExperimental=true; // Needed in core profile
-	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		return -1;
-	}
-
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	int FrameDuration = 16;
+	auto nextFrame = std::chrono::system_clock::now() +
+		std::chrono::milliseconds(FrameDuration);
+	
+	bool exit;
 	do
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		exit = false;
+		// get inputs
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed) { exit = true; }
+		}
+
+		std::this_thread::sleep_until(nextFrame);
+		
+		// render
+		window.clear();
+//		window.draw(tree);
+		window.display();
 	}
-	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-		glfwWindowShouldClose(window) == 0);
+	while (!exit);
+	window.close();
 
 	return 0;
 }

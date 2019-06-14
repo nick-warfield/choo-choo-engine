@@ -3,7 +3,7 @@ SDIR = src
 ODIR = src/obj
 LDIR = lib
 
-LIBS = -lGL -lGLEW -lGLU -lglut -lglfw
+LIBS = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-network
 
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
