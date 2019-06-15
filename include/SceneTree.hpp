@@ -8,6 +8,7 @@
 class SceneTree : public sf::Drawable
 {
 	public:
+		SceneTree(void);
 		void addScene(Scene&);
 		void removeScene(Scene&);
 
@@ -18,7 +19,7 @@ class SceneTree : public sf::Drawable
 
 	private:
 		void draw(Scene&, sf::RenderTarget&, sf::RenderStates) const;
-		std::unique_ptr<Scene> m_root;
+		std::shared_ptr<Scene> m_root;
 };
 
 #endif

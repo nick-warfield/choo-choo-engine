@@ -1,9 +1,20 @@
+#include <iostream>
 #include <memory>
+
 #include <SFML/Graphics.hpp>
+
 #include "SceneTree.hpp"
+#include "GUI.hpp"
+
+SceneTree::SceneTree()
+{
+	m_root = std::make_shared<GUI>();
+	std::cout << m_root->id() << std::endl;
+}
 
 void SceneTree::addScene(Scene& scene)
 {
+	m_root->add(std::make_shared<GUI>());
 }
 
 void SceneTree::draw(sf::RenderTarget& target, sf::RenderStates states) const

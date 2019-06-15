@@ -4,6 +4,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "SceneTree.hpp"
+#include "GUI.hpp"
+
 int main(void)
 {
 	sf::RenderWindow window;
@@ -17,13 +20,15 @@ int main(void)
 	window.setView(sf::View(sf::FloatRect(0, 0,
 					window.getSize().x, window.getSize().y)));
 
-	int FrameDuration = 16;
-	auto nextFrame = std::chrono::system_clock::now() +
-		std::chrono::milliseconds(FrameDuration);
-	
+	SceneTree tree;
+
+	int FrameDuration = 1000;
 	bool exit;
 	do
 	{
+		auto nextFrame = std::chrono::system_clock::now() +
+			std::chrono::milliseconds(FrameDuration);
+
 		exit = false;
 		// get inputs
 		sf::Event event;
@@ -31,6 +36,9 @@ int main(void)
 		{
 			if (event.type == sf::Event::Closed) { exit = true; }
 		}
+
+		GUI g;
+		tree.addScene(g);
 
 		std::this_thread::sleep_until(nextFrame);
 		

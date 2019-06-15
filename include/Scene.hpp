@@ -4,7 +4,9 @@
 #include <vector>
 #include <memory>
 
-class Scene : public std::enable_shared_from_this<Scene>
+#include <SFML/Graphics.hpp>
+
+class Scene : private std::enable_shared_from_this<Scene>
 {
 	public:
 		Scene();
@@ -16,7 +18,16 @@ class Scene : public std::enable_shared_from_this<Scene>
 	
 		virtual void draw(void) { }
 
-		uint id(void);
+		unsigned long id(void);
+		bool isVisible(void);
+		void setVisible(bool);
+
+		sf::Texture getTexture(void);
+		void setTexture(sf::Texture);
+
+		sf::Transform getTransform(void);
+		void setTransform(sf::Transform);
+
 		std::weak_ptr<Scene> get(uint);
 		std::weak_ptr<Scene> get(const Scene&);
 
@@ -27,10 +38,11 @@ class Scene : public std::enable_shared_from_this<Scene>
 		std::weak_ptr<Scene> getParent(void);
 
 	private:
-		static uint m_nextId;
-		uint m_id;
-
+		static unsigned long m_nextId;
+		unsigned long m_id;
 		bool m_isVisible;
+		sf::Texture m_texture;
+		sf::Transform m_transform;
 
 		std::weak_ptr<Scene> m_parent;
 		std::vector<std::shared_ptr<Scene>> m_children;

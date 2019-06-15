@@ -1,12 +1,12 @@
-#include <vector>
-#include <memory>
 #include "Scene.hpp"
 
-uint Scene::m_nextId = 0;
-Scene::Scene() : m_id(++m_nextId), m_isVisible(true) { }
+unsigned long Scene::m_nextId = 0;
+Scene::Scene() : m_id(m_nextId++), m_isVisible(true) { }
 Scene::~Scene() { }
 
-uint Scene::id() { return m_id; }
+unsigned long Scene::id() { return m_id; }
+bool Scene::isVisible() { return m_isVisible; }
+void Scene::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Scene::add(std::shared_ptr<Scene> child)
 {
@@ -24,12 +24,5 @@ std::vector<std::weak_ptr<Scene>> Scene::getChildren()
 	return copies;
 }
 
-std::weak_ptr<Scene> Scene::getParent()
-{
-	return m_parent;
-}
-
-void Scene::setParent(std::weak_ptr<Scene> parent)
-{
-	m_parent = parent;
-}
+std::weak_ptr<Scene> Scene::getParent() { return m_parent; }
+void Scene::setParent(std::weak_ptr<Scene> parent) { m_parent = parent; }
