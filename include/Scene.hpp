@@ -12,11 +12,12 @@ class Scene : private std::enable_shared_from_this<Scene>
 		Scene();
 		virtual ~Scene(void) = 0;
 
-		virtual void preload(void) { }
-		virtual void load(void) { }
-		virtual void unload(void) { }
+		void init(void);
+		void start(void);
+		void update(void);
+		void end(void);
 	
-		virtual void render(void) { }
+		virtual void render(void);
 
 		unsigned long id(void);
 		bool isVisible(void);
@@ -41,6 +42,12 @@ class Scene : private std::enable_shared_from_this<Scene>
 		bool m_isVisible;
 		sf::Texture m_texture;
 		sf::Transform m_transform;
+
+		virtual void preload(void);
+		virtual void postload(void);
+		virtual void onStart(void);
+		virtual void onUpdate(void);
+		virtual void onEnd(void);
 
 	private:
 		static unsigned long m_nextId;

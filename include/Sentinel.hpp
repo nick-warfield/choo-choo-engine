@@ -6,9 +6,6 @@
 class Sentinel : public Scene
 {
 	public:
-		void preload(void);
-		void load(void);
-		void unload(void);
 };
 
 #endif

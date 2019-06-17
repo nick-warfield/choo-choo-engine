@@ -5,13 +5,13 @@ SDIR = src
 ODIR = src/obj
 LDIR = lib
 
-LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system 
+LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -DSPDLOG_COMPILED_LIB
 
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
 
-_DEPS = Game.hpp Scene.hpp Sentinel.hpp GUI.hpp
-_OBJ = main.o Game.o Scene.o Sentinel.o GUI.o
+_DEPS = Log.hpp Game.hpp Scene.hpp Sentinel.hpp GUI.hpp
+_OBJ = main.o Log.o Game.o Scene.o Sentinel.o GUI.o
 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))

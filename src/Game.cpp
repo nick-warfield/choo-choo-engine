@@ -8,7 +8,7 @@
 #include "Game.hpp"
 #include "Sentinel.hpp"
 
-const int Game::m_frameDuration = 16;
+const int Game::m_frameDuration = 500;
 
 Game::Game()
 {
@@ -23,8 +23,8 @@ Game::Game()
 	m_window.setActive(true);
 
 	m_root = std::make_shared<Sentinel>();
-	m_root->preload();
-	m_root->load();
+	m_root->init();
+	m_root->start();
 }
 
 bool Game::loop()
@@ -39,6 +39,8 @@ bool Game::loop()
 		if (event.type == sf::Event::Closed) { return false; }
 	}
 
+	m_root->add(std::make_shared<Sentinel>());
+
 	std::this_thread::sleep_until(nextFrame);
 	
 	// render
@@ -50,6 +52,7 @@ bool Game::loop()
 
 void Game::close()
 {
-	m_root->unload();
+	m_root->end();
+	m_root.reset();
 	m_window.close();
 }

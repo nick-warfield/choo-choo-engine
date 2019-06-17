@@ -33,3 +33,6 @@
 
 # output
 choo-choo
+
+# logs and libs
+./logs
