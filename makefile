@@ -1,15 +1,17 @@
+OUTPUT = choo-choo
+
 IDIR = include
 SDIR = src
 ODIR = src/obj
 LDIR = lib
 
-LIBS = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-network
+LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system 
 
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
 
-_DEPS = Scene.hpp SceneTree.hpp GUI.hpp
-_OBJ = main.o Scene.o SceneTree.o GUI.o
+_DEPS = Game.hpp Scene.hpp Sentinel.hpp GUI.hpp
+_OBJ = main.o Game.o Scene.o Sentinel.o GUI.o
 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
@@ -17,7 +19,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-choo-choo: $(OBJ)
+$(OUTPUT): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean

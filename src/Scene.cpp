@@ -10,8 +10,19 @@ void Scene::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Scene::add(std::shared_ptr<Scene> child)
 {
-	m_children.emplace_back(child);
+	m_children.insert(child);
 	child->setParent(weak_from_this());
+	child->preload();
+	child->load();
+}
+
+void Scene::remove(std::shared_ptr<Scene> child)
+{
+	if (m_children.find(child) != m_children.end())
+	{
+		child->unload();
+		m_children.erase(child);
+	}
 }
 
 std::vector<std::weak_ptr<Scene>> Scene::getChildren()

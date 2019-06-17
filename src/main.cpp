@@ -4,51 +4,15 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "SceneTree.hpp"
-#include "GUI.hpp"
+#include "Game.hpp"
 
 int main(void)
 {
-	sf::RenderWindow window;
-	window.create(sf::VideoMode(1, 1), "Float Window");
-	auto dt = sf::VideoMode::getDesktopMode();
+	Game game;
 
-	window.setSize(sf::Vector2u(dt.width * 3 / 5, dt.height * 3 / 5));
-	window.setPosition(sf::Vector2i(dt.width / 2 - window.getSize().x / 2, 
-				dt.height / 2 - window.getSize().y / 2));
-	window.setVerticalSyncEnabled(true);
-	window.setView(sf::View(sf::FloatRect(0, 0,
-					window.getSize().x, window.getSize().y)));
+	while (game.loop());
 
-	SceneTree tree;
-
-	int FrameDuration = 1000;
-	bool exit;
-	do
-	{
-		auto nextFrame = std::chrono::system_clock::now() +
-			std::chrono::milliseconds(FrameDuration);
-
-		exit = false;
-		// get inputs
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed) { exit = true; }
-		}
-
-		GUI g;
-		tree.addScene(g);
-
-		std::this_thread::sleep_until(nextFrame);
-		
-		// render
-		window.clear();
-//		window.draw(tree);
-		window.display();
-	}
-	while (!exit);
-	window.close();
+	game.close();
 
 	return 0;
 }

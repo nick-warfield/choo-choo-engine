@@ -1,5 +1,5 @@
-#ifndef GUI_H_INCLUDED
-#define GUI_H_INCLUDED
+#ifndef GUI_HPP_INCLUDED
+#define GUI_HPP_INCLUDED
 
 #include "Scene.hpp"
 

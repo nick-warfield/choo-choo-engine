@@ -1,7 +1,7 @@
-#ifndef SCENE_H_INCLUDED
-#define SCENE_H_INCLUDED
+#ifndef SCENE_HPP_INCLUDED
+#define SCENE_HPP_INCLUDED
 
-#include <vector>
+#include <set>
 #include <memory>
 
 #include <SFML/Graphics.hpp>
@@ -16,7 +16,7 @@ class Scene : private std::enable_shared_from_this<Scene>
 		virtual void load(void) { }
 		virtual void unload(void) { }
 	
-		virtual void draw(void) { }
+		virtual void render(void) { }
 
 		unsigned long id(void);
 		bool isVisible(void);
@@ -32,20 +32,22 @@ class Scene : private std::enable_shared_from_this<Scene>
 		std::weak_ptr<Scene> get(const Scene&);
 
 		void add(std::shared_ptr<Scene>);
-		void remove(Scene&);
+		void remove(std::shared_ptr<Scene>);
 
 		std::vector<std::weak_ptr<Scene>> getChildren(void);
 		std::weak_ptr<Scene> getParent(void);
 
-	private:
-		static unsigned long m_nextId;
-		unsigned long m_id;
+	protected:
 		bool m_isVisible;
 		sf::Texture m_texture;
 		sf::Transform m_transform;
 
+	private:
+		static unsigned long m_nextId;
+		unsigned long m_id;
+
 		std::weak_ptr<Scene> m_parent;
-		std::vector<std::shared_ptr<Scene>> m_children;
+		std::set<std::shared_ptr<Scene>> m_children;
 
 		void setParent(std::weak_ptr<Scene>);
 };
