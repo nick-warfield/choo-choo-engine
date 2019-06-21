@@ -1,9 +1,8 @@
-#include "Log.hpp"
 #include "Scene.hpp"
 
 unsigned long Scene::m_nextId = 0;
 Scene::Scene() : m_id(m_nextId++), m_isVisible(true) { }
-Scene::~Scene() { Log::eh()->info("Scene Destroyed"); }
+Scene::~Scene() { }
 
 unsigned long Scene::id() { return m_id; }
 bool Scene::isVisible() { return m_isVisible; }
@@ -11,22 +10,16 @@ void Scene::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Scene::init()
 {
-	Log::eh()->info("Scene with id: {0} began load", id());
 	preload();
-	for (auto child : m_children) { child->init(); }
-	postload();
-	Log::eh()->info("Scene with id: {0} finish load", id());
 }
 void Scene::start()
 {
 	onStart();
-	Log::eh()->info("Scene with id: {0} started", id());
 }
 void Scene::end()
 {
 	for (auto child : m_children) { child->end(); }
 	onEnd();
-	Log::eh()->info("Scene with id: {0} ended", id());
 }
 void Scene::preload() { }
 void Scene::postload() { }

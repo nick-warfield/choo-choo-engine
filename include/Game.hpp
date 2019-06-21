@@ -3,8 +3,6 @@
 
 #include <memory>
 #include <SFML/Window.hpp>
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
 #include "Scene.hpp"
 
 class Game

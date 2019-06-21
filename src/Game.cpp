@@ -7,8 +7,9 @@
 
 #include "Game.hpp"
 #include "Sentinel.hpp"
+#include "Unit.hpp"
 
-const int Game::m_frameDuration = 500;
+const int Game::m_frameDuration = 16;
 
 Game::Game()
 {
@@ -39,7 +40,7 @@ bool Game::loop()
 		if (event.type == sf::Event::Closed) { return false; }
 	}
 
-	m_root->add(std::make_shared<Sentinel>());
+	m_root->add(std::make_shared<Unit>());
 
 	std::this_thread::sleep_until(nextFrame);
 	
@@ -47,7 +48,7 @@ bool Game::loop()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	m_window.display();
 
-	return true;
+	return false;
 }
 
 void Game::close()
