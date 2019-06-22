@@ -1,12 +1,10 @@
 #include "Scene.hpp"
 
 unsigned long Scene::m_nextId = 0;
-Scene::Scene() : m_id(m_nextId++), m_isVisible(true) { }
+Scene::Scene() : m_id(m_nextId++) { }
 Scene::~Scene() { }
 
 unsigned long Scene::id() { return m_id; }
-bool Scene::isVisible() { return m_isVisible; }
-void Scene::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Scene::init()
 {
@@ -26,8 +24,6 @@ void Scene::postload() { }
 void Scene::onStart() { }
 void Scene::onUpdate() { }
 void Scene::onEnd() { }
-
-void Scene::render() { }
 
 void Scene::add(std::shared_ptr<Scene> child)
 {

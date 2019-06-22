@@ -6,7 +6,7 @@
 class Attribute
 {
 	public:
-		Attribute(int, int = 0);
+		Attribute(int = 10, int = 0);
 		Attribute(int, int, int);
 
 		void reset(void);

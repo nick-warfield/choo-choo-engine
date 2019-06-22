@@ -17,17 +17,7 @@ class Scene : private std::enable_shared_from_this<Scene>
 		void update(void);
 		void end(void);
 	
-		virtual void render(void);
-
 		unsigned long id(void);
-		bool isVisible(void);
-		void setVisible(bool);
-
-		sf::Texture getTexture(void);
-		void setTexture(sf::Texture);
-
-		sf::Transform getTransform(void);
-		void setTransform(sf::Transform);
 
 		std::weak_ptr<Scene> get(uint);
 		std::weak_ptr<Scene> get(const Scene&);
@@ -39,10 +29,6 @@ class Scene : private std::enable_shared_from_this<Scene>
 		std::weak_ptr<Scene> getParent(void);
 
 	protected:
-		bool m_isVisible;
-		sf::Texture m_texture;
-		sf::Transform m_transform;
-
 		virtual void preload(void);
 		virtual void postload(void);
 		virtual void onStart(void);

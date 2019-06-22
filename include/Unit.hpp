@@ -2,6 +2,8 @@
 #define UNIT_HPP_INCLUDED
 
 #include "Scene.hpp"
+#include "Attribute.hpp"
+#include "Move.hpp"
 
 class Unit : public Scene
 {
@@ -10,13 +12,13 @@ class Unit : public Scene
 		{
 			Stats(std::vector<int>);
 			Stats(int = 1, int = 1, int = 1, int = 1, int = 1, int = 1, int = 1); 
-			int Health;
-			int Might;
-			int Haste;
-			int Skill;
-			int Brawn;
-			int Will;
-			int Movement;
+			Attribute Health;
+			Attribute Might;
+			Attribute Haste;
+			Attribute Skill;
+			Attribute Brawn;
+			Attribute Will;
+			Attribute Movement;
 		};
 
 	protected:
