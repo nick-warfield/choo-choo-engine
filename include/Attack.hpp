@@ -5,6 +5,9 @@
 
 class Attack : public Move
 {
+	public:
+		Attack(void);
+
 	protected:
 		Attribute m_damage;
 		Attribute m_hit;

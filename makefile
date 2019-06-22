@@ -10,11 +10,11 @@ LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-sys
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
 
-_DEPS = Game.hpp Scene.hpp Unit.hpp Sentinel.hpp GUI.hpp Attribute.hpp
-_OBJ = main.o Game.o Scene.o Unit.o Sentinel.o GUI.o Attribute.o
+_DEPS = Game Scene Unit Sentinel Move Attack Shape GUI Attribute Point
+_OBJ = main $(_DEPS)
 
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+DEPS = $(patsubst %,$(IDIR)/%.hpp,$(_DEPS))
+OBJ = $(patsubst %,$(ODIR)/%.o,$(_OBJ))
 
 $(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

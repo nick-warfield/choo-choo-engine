@@ -9,7 +9,7 @@ Attribute::Attribute(int max, int min)
 	m_floor = min;
 	m_min = min;
 }
-Attribute::Attribute(int value, int min, int max)
+Attribute::Attribute(int value, int max, int min)
 {
 	if (max < min) { throw std::invalid_argument("min must be less than max"); }
 	m_current = value;
@@ -25,6 +25,16 @@ void Attribute::reset()
 	m_ceiling = m_max;
 	m_floor = m_min;
 }
+void Attribute::resetBounds()
+{
+	m_ceiling = m_max;
+	m_floor = m_min;
+}
+void Attribute::resetUpper() { m_ceiling = m_max; }
+void Attribute::resetLower() { m_floor = m_min; }
+
+void Attribute::toCeil() { m_current = m_ceiling; }
+void Attribute::toFloor() { m_current = m_floor; }
 
 int Attribute::getValue() { return m_current; }
 int Attribute::getCeil() { return m_ceiling; }

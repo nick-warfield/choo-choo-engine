@@ -10,6 +10,13 @@ class Attribute
 		Attribute(int, int, int);
 
 		void reset(void);
+		void resetBounds(void);
+		void resetUpper(void);
+		void resetLower(void);
+
+		void toCeil(void);
+		void toFloor(void);
+
 		int getValue(void);
 		int getCeil(void);
 		int getFloor(void);

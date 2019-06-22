@@ -16,6 +16,8 @@ int main(void)
 	std::cout << dex << std::endl;
 	dex.reset();
 	std::cout << dex << std::endl;
+	std::cout << sizeof(dex) << std::endl;
+	std::cout << sizeof(dex.getValue()) << std::endl;
 
 	return 0;
 }

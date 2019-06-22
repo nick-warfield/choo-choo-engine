@@ -3,28 +3,28 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
-#include "Unit.hpp"
 #include "Attribute.hpp"
 #include "Shape.hpp"
 
 class Move
 {
 	public:
-		Move(const Unit&);
+		Move(std::string, std::string, std::unique_ptr<Shape>); //add textures/icon later
 		virtual ~Move(void) = 0;
 		virtual void operator()(void) = 0;
 		virtual bool isUsable(void);
 
 	protected:
-		std::string m_name;
-		std::string m_tooltip;
+		const std::string m_name;
+		const std::string m_tooltip;
 		// icon
 		// sprite sheet
 
 		Attribute m_uses;
 		Attribute m_range;
-		Shape m_shape;
+		const std::unique_ptr<const Shape> m_shape;
 };
 
 #endif
