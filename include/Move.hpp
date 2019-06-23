@@ -8,15 +8,18 @@
 #include "Attribute.hpp"
 #include "Shape.hpp"
 
+class Unit;
+
 class Move
 {
 	public:
-		Move(std::string, std::string, std::unique_ptr<Shape>); //add textures/icon later
 		virtual ~Move(void) = 0;
-		virtual void operator()(void) = 0;
+		virtual void operator()(Unit&, std::vector<Unit>) = 0;
 		virtual bool isUsable(void);
 
 	protected:
+		Move(std::string, std::string, std::unique_ptr<Shape>); //add textures/icon later
+
 		const std::string m_name;
 		const std::string m_tooltip;
 		// icon

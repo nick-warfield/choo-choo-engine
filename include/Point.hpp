@@ -6,8 +6,8 @@
 class Point : public Shape
 {
 	public:
-		const std::vector<sf::Vector2<int>> area(sf::Vector2<int>,
-				sf::Vector2<int> = sf::Vector2<int>());
+		std::vector<sf::Vector2<int>> area(sf::Vector2<int>,
+				sf::Vector2<int> = sf::Vector2<int>()) const;
 };
 
 #endif
