@@ -172,13 +172,6 @@ void Attribute::operator/=(const int& other)
 	bind();
 }
 
-Attribute& Attribute::operator=(const int& other)
-{
-	m_current = other;
-	bind();
-	return *this;
-}
-
 bool Attribute::operator==(const Attribute& a)
 {
 	return m_current == a.m_current && m_ceiling == a.m_ceiling;

@@ -48,8 +48,6 @@ class Attribute
 		void operator*=(const int&);
 		void operator/=(const int&);
 
-		Attribute& operator=(const int&);
-
 		bool operator==(const Attribute&);
 		bool operator!=(const Attribute&);
 

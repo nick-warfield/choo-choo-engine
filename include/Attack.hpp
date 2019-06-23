@@ -10,13 +10,16 @@
 class Attack : public Move
 {
 	public:
-		Attack(void);
-		void operator()(Unit&, std::vector<Unit>);
+		Attack(const Unit& user);
+		~Attack(void);
+		bool isUsable(void);
 
 	protected:
 		Attribute m_damage;
 		Attribute m_hit;
 		Attribute m_crit;
+
+		void use_impl(sf::Vector2<int>);
 };
 
 #endif
