@@ -3,6 +3,7 @@
 
 #include <set>
 #include <memory>
+#include <string>
 
 #include <SFML/Graphics.hpp>
 
@@ -12,8 +13,8 @@ class Scene : private std::enable_shared_from_this<Scene>
 		Scene();
 		virtual ~Scene(void) = 0;
 
-		void init(void);
-		void start(void);
+		void init(void);		// do all this shit in the constructor
+		void start(void);		// make it protected so derived classes have to implement it
 		void update(void);
 		void end(void);
 	
@@ -38,6 +39,7 @@ class Scene : private std::enable_shared_from_this<Scene>
 	private:
 		static unsigned long m_nextId;
 		unsigned long m_id;
+		std::string m_name;
 
 		std::weak_ptr<Scene> m_parent;
 		std::set<std::shared_ptr<Scene>> m_children;

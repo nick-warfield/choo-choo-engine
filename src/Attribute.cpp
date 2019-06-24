@@ -36,11 +36,11 @@ void Attribute::resetLower() { m_floor = m_min; }
 void Attribute::toCeil() { m_current = m_ceiling; }
 void Attribute::toFloor() { m_current = m_floor; }
 
-int Attribute::getValue() { return m_current; }
-int Attribute::getCeil() { return m_ceiling; }
-int Attribute::getFloor() { return m_floor; }
-int Attribute::getMax() { return m_max; }
-int Attribute::getMin() { return m_min; }
+int Attribute::getValue() const { return m_current; }
+int Attribute::getCeil() const { return m_ceiling; }
+int Attribute::getFloor() const { return m_floor; }
+int Attribute::getMax() const { return m_max; }
+int Attribute::getMin() const { return m_min; }
 
 void Attribute::setValue(int value) { m_current = value; bind(); }
 void Attribute::setCeil(int ceil)
@@ -87,7 +87,7 @@ void Attribute::shiftLowerBounds(int amount)
 	m_min += amount;
 }
 
-Attribute Attribute::operator-()
+Attribute Attribute::operator-() const
 {
 	Attribute temp = *this;
 	std::swap(temp.m_floor, temp.m_ceiling);
@@ -125,25 +125,25 @@ Attribute Attribute::operator--(int)
 	return temp;
 }
 
-Attribute Attribute::operator+(const int& num)
+Attribute Attribute::operator+(const int& num) const
 {
 	Attribute temp = *this;
 	temp.m_current += num;
 	temp.bind();
 	return temp;
 }
-Attribute Attribute::operator-(const int& num)
+Attribute Attribute::operator-(const int& num) const
 {
 	return *this + -num;
 }
-Attribute Attribute::operator*(const int& num)
+Attribute Attribute::operator*(const int& num) const
 {
 	Attribute temp = *this;
 	temp.m_current *= num;
 	temp.bind();
 	return temp;
 }
-Attribute Attribute::operator/(const int& num)
+Attribute Attribute::operator/(const int& num) const
 {
 	Attribute temp = *this;
 	temp.m_current /= num;
@@ -172,21 +172,21 @@ void Attribute::operator/=(const int& other)
 	bind();
 }
 
-bool Attribute::operator==(const Attribute& a)
+bool Attribute::operator==(const Attribute& a) const
 {
 	return m_current == a.m_current && m_ceiling == a.m_ceiling;
 }
-bool Attribute::operator!=(const Attribute& a)
+bool Attribute::operator!=(const Attribute& a) const
 {
 	return m_current != a.m_current || m_ceiling != a.m_ceiling;
 }
 
-bool Attribute::operator==(const int& other) { return m_current == other; }
-bool Attribute::operator!=(const int& other) { return m_current != other; }
-bool Attribute::operator<=(const int& other) { return m_current <= other; }
-bool Attribute::operator>=(const int& other) { return m_current >= other; }
-bool Attribute::operator<(const int& other) { return m_current < other; }
-bool Attribute::operator>(const int& other) { return m_current > other; }
+bool Attribute::operator==(const int& other) const { return m_current == other; }
+bool Attribute::operator!=(const int& other) const { return m_current != other; }
+bool Attribute::operator<=(const int& other) const { return m_current <= other; }
+bool Attribute::operator>=(const int& other) const { return m_current >= other; }
+bool Attribute::operator<(const int& other) const { return m_current < other; }
+bool Attribute::operator>(const int& other) const { return m_current > other; }
 
 void Attribute::bind()
 {

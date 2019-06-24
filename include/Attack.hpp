@@ -19,7 +19,7 @@ class Attack : public Move
 		Attribute m_hit;
 		Attribute m_crit;
 
-		void use_impl(sf::Vector2<int>);
+		void use_impl(std::vector<std::reference_wrapper<Unit>>);
 };
 
 #endif

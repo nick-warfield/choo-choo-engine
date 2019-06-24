@@ -34,7 +34,7 @@ class Move
 		Attribute m_range;
 		const std::unique_ptr<const Shape> m_shape;
 
-		virtual void use_impl(sf::Vector2<int>) = 0;
+		virtual void use_impl(std::vector<std::reference_wrapper<Unit>>) = 0;
 };
 
 #endif

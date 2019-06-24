@@ -17,11 +17,11 @@ class Attribute
 		void toCeil(void);
 		void toFloor(void);
 
-		int getValue(void);
-		int getCeil(void);
-		int getFloor(void);
-		int getMax(void);
-		int getMin(void);
+		int getValue(void) const;
+		int getCeil(void) const;
+		int getFloor(void) const;
+		int getMax(void) const;
+		int getMin(void) const;
 
 		void setValue(int);
 		void setCeil(int);
@@ -32,31 +32,31 @@ class Attribute
 		void shiftUpperBounds(int = 1);
 		void shiftLowerBounds(int);
 		
-		Attribute operator-(void);
+		Attribute operator-(void) const;
 		Attribute& operator++(void);
 		Attribute operator++(int);
 		Attribute& operator--(void);
 		Attribute operator--(int);
 
-		Attribute operator+(const int&);
-		Attribute operator-(const int&);
-		Attribute operator*(const int&);
-		Attribute operator/(const int&);
+		Attribute operator+(const int&) const;
+		Attribute operator-(const int&) const;
+		Attribute operator*(const int&) const;
+		Attribute operator/(const int&) const;
 
 		void operator+=(const int&);
 		void operator-=(const int&);
 		void operator*=(const int&);
 		void operator/=(const int&);
 
-		bool operator==(const Attribute&);
-		bool operator!=(const Attribute&);
+		bool operator==(const Attribute&) const;
+		bool operator!=(const Attribute&) const;
 
-		bool operator==(const int&);
-		bool operator!=(const int&);
-		bool operator<=(const int&);
-		bool operator>=(const int&);
-		bool operator<(const int&);
-		bool operator>(const int&);
+		bool operator==(const int&) const;
+		bool operator!=(const int&) const;
+		bool operator<=(const int&) const;
+		bool operator>=(const int&) const;
+		bool operator<(const int&) const;
+		bool operator>(const int&) const;
 
 		friend std::ostream& operator<<(std::ostream& out, const Attribute& a)
 		{
