@@ -12,7 +12,7 @@ void Attack::use_impl(std::vector<std::reference_wrapper<Unit>> targets)
 {
 	for (auto t : targets)
 	{
-		t.get().getHealth() -= m_damage.getValue() + m_user.might();
+
 	}
 }
 

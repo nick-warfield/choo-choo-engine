@@ -1,17 +1,35 @@
-#include <memory>
-#include <exception>
-
 #include "Unit.hpp"
-#include "GUI.hpp"
 
 sf::Vector2<int> Unit::getPosition() const { return m_position; }
 
-int Unit::health() const { return m_health.getValue(); }
-int Unit::might() const { return m_might.getValue(); }
-int Unit::haste() const { return m_haste.getValue(); }
-int Unit::skill() const { return m_skill.getValue(); }
-int Unit::brawn() const { return m_brawn.getValue(); }
-int Unit::will() const { return m_will.getValue(); }
+int Unit::hp() const { return m_hp.getValue(); }
 int Unit::movement() const { return m_movement.getValue(); }
+int Unit::speed() const { return 0; }
 
-Attribute& Unit::getHealth() { return m_health; }
+int Unit::hit() const { return 0; }
+int Unit::crit() const { return 0; }
+int Unit::atkPower() const { return 0; }
+int Unit::magPower() const { return 0; }
+
+int Unit::dodge() const { return 0; }
+int Unit::resist() const { return 0; }
+int Unit::atkDefense() const { return 0; }
+int Unit::magDefense() const { return 0; }
+
+Skill::RANK Unit::getSkill(Skill::NAME name) const
+{
+	auto r = m_skills.find(name);
+	return r == m_skills.end() ? Skill::RANK::UNTRAINED : r->second;
+}
+
+void Unit::levelSkill(Skill::NAME skill)
+{
+	auto r = m_skills.find(skill);
+	if (r != m_skills.end()) { Skill::rankUp(r->second); }
+}
+
+void Unit::trainSkill(Skill::NAME skill)
+{
+	if (m_skills.find(skill) == m_skills.end())
+	{ m_skills.emplace(skill, Skill::D); }
+}

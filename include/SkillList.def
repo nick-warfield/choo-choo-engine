@@ -1,0 +1,8 @@
+// List of all Skills
+// usage: X(SKILLNAME)
+// where SKILLNAME should be all caps and one word
+
+X(SWORD)
+X(LANCE)
+X(AXE)
+X(BOW)

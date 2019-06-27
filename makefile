@@ -12,7 +12,7 @@ CFLAGS = -std=c++17 -I$(IDIR)
 
 _DEPS = Game GameException Scene Sentinel GUI Level Tile Attribute \
 		Shape Point \
-		Unit \
+		Unit Skill \
 		Move Attack \
 		Terrain 
 
