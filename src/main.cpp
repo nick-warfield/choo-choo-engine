@@ -8,8 +8,9 @@
 
 int main(void)
 {
-	Skill::NAME s = Skill::NAME::AXE;
-	std::cout << Skill::toString(s) << std::endl;
+	Skill::RANK r = Skill::RANK::UNTRAINED;
+	Skill::rankUp(r);
+	std::cout << Skill::toString(r) << std::endl;
 
 	return 0;
 }

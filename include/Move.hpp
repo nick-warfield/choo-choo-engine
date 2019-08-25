@@ -15,6 +15,7 @@ class Unit;
 class Move
 {
 	public:
+		Move (const Move&);
 		virtual ~Move(void) = 0;
 		void use(sf::Vector2<int>);
 		virtual bool isUsable(void);

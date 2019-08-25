@@ -16,9 +16,9 @@ namespace Skill
 
 	enum RANK { UNTRAINED, D, C, B, A, S };
 
-	void rankUp(RANK);
-	std::string toString(NAME);
-	std::string toString(RANK);
+	void rankUp(RANK&);
+	std::string toString(const NAME&);
+	std::string toString(const RANK&);
 };
 
 #endif

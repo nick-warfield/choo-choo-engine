@@ -1,35 +1,26 @@
 #ifndef UNIT_HPP_INCLUDED
 #define UNIT_HPP_INCLUDED
 
+#include <vector>
 #include <unordered_map>
 
 #include "Scene.hpp"
 #include "Attribute.hpp"
 #include "Move.hpp"
 #include "Skill.hpp"
+#include "Stats.hpp"
 
 class Unit : public Scene
 {
 	public:
-		int hp(void) const;
-		int movement(void) const;
-		int speed(void) const;
-
-		int hit(void) const;
-		int crit(void) const;
-		int atkPower(void) const;
-		int magPower(void) const;
-
-		int dodge(void) const;		// single target attack evasion
-		int resist(void) const;		// aoe and debuff evasion
-		int atkDefense(void) const;
-		int magDefense(void) const;
-
 		sf::Vector2<int> getPosition(void) const;
 
 		Skill::RANK getSkill(Skill::NAME) const;
 		void levelSkill(Skill::NAME);
 		void trainSkill(Skill::NAME);
+
+		std::vector<Move> moveList(void);
+		Stats stats(void);
 
 
 	private:

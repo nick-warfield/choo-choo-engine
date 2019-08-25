@@ -1,7 +1,7 @@
 #include "Skill.hpp"
 #include "GameException.hpp"
 
-void Skill::rankUp(RANK rank)
+void Skill::rankUp(RANK& rank)
 {
 	switch (rank)
 	{
@@ -13,7 +13,7 @@ void Skill::rankUp(RANK rank)
 	}
 }
 
-std::string Skill::toString(RANK rank)
+std::string Skill::toString(const RANK& rank)
 {
 	switch (rank)
 	{
@@ -27,7 +27,7 @@ std::string Skill::toString(RANK rank)
 	}
 }
 
-std::string Skill::toString(NAME name)
+std::string Skill::toString(const NAME& name)
 {
 	std::string s;
 	switch (name)
