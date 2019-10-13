@@ -4,13 +4,13 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <Skill.hpp>
+#include "Game.hpp"
 
 int main(void)
 {
-	Skill::RANK r = Skill::RANK::UNTRAINED;
-	Skill::rankUp(r);
-	std::cout << Skill::toString(r) << std::endl;
+	Game game;
+	while (game.loop()) { }
+	game.close();
 
 	return 0;
 }

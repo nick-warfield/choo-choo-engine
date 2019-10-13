@@ -13,7 +13,7 @@ const int Game::m_frameDuration = 16;
 
 Game::Game()
 {
-	m_window.create(sf::VideoMode(1, 1), "Float Window");
+	m_window.create(sf::VideoMode(1, 1), "game window");
 	auto dt = sf::VideoMode::getDesktopMode();
 
 	m_window.setSize(sf::Vector2u(dt.width * 3 / 5, dt.height * 3 / 5));
@@ -48,7 +48,7 @@ bool Game::loop()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	m_window.display();
 
-	return false;
+	return true;
 }
 
 void Game::close()

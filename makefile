@@ -30,4 +30,4 @@ $(OUTPUT): $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ ./choo-choo ./logs/*.txt
+	trash $(ODIR)/*.o *~ core $(INCDIR)/*~ ./choo-choo ./logs/*.txt
