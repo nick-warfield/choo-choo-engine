@@ -6,8 +6,6 @@
 #include <SFML/OpenGL.hpp>
 
 #include "Game.hpp"
-#include "Sentinel.hpp"
-#include "Unit.hpp"
 
 const int Game::m_frameDuration = 16;
 
@@ -22,10 +20,6 @@ Game::Game()
 	m_window.setVerticalSyncEnabled(true);
 	m_window.setSize(sf::Vector2u(m_window.getSize().x, m_window.getSize().y));
 	m_window.setActive(true);
-
-	m_root = std::make_shared<Sentinel>();
-	m_root->init();
-	m_root->start();
 }
 
 bool Game::loop()
@@ -40,8 +34,6 @@ bool Game::loop()
 		if (event.type == sf::Event::Closed) { return false; }
 	}
 
-	m_root->add(std::make_shared<Unit>());
-
 	std::this_thread::sleep_until(nextFrame);
 	
 	// render
@@ -53,7 +45,5 @@ bool Game::loop()
 
 void Game::close()
 {
-	m_root->end();
-	m_root.reset();
 	m_window.close();
 }

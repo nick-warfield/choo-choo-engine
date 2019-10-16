@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <SFML/Window.hpp>
-#include "Scene.hpp"
 
 class Game
 {
@@ -14,7 +13,6 @@ class Game
 
 	private:
 		sf::Window m_window;
-		std::shared_ptr<Scene> m_root;
 		
 		//some sort of config file
 		static const int m_frameDuration;	// in milliseconds

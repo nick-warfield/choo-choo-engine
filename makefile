@@ -10,11 +10,8 @@ LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-sys
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
 
-_DEPS = Game GameException Scene Sentinel GUI Level Tile Attribute \
-		Shape Point \
-		Unit Skill \
-		Move Attack \
-		Terrain 
+_DEPS = Game GameException Attribute \
+		Shape Point
 
 _OBJ = main $(_DEPS)
 
