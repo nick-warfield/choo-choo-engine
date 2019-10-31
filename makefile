@@ -5,7 +5,7 @@ SDIR = src
 ODIR = src/obj
 LDIR = lib
 
-LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -pthread -DSPDLOG_COMPILED_LIB
+LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -pthread
 
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
