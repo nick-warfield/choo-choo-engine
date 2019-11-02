@@ -22,6 +22,11 @@ Game::Game()
 	m_window.setActive(true);
 }
 
+void Game::addListener(Listener List)
+{
+	m_frameEvent += List;
+}
+
 bool Game::loop()
 {
 	auto nextFrame = std::chrono::system_clock::now() +
@@ -34,6 +39,7 @@ bool Game::loop()
 		if (event.type == sf::Event::Closed) { return false; }
 	}
 
+	m_frameEvent();
 	std::this_thread::sleep_until(nextFrame);
 	
 	// render

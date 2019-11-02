@@ -10,7 +10,8 @@ LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-sys
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
 
-_DEPS = Game GameException Attribute \
+_DEPS = Game GameException GameObject Attribute \
+		Event Listener \
 		Shape Point
 
 _OBJ = main $(_DEPS)
