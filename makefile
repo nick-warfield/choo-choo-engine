@@ -5,13 +5,15 @@ SDIR = src
 ODIR = src/obj
 LDIR = lib
 
-LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -pthread -lstdc++fs
+LIBS = -lGL -lsfml-graphics -lsfml-window -lsfml-audio \
+	   -lsfml-network -lsfml-system -pthread -lstdc++fs
 
 CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
 
 _DEPS = Game GameException GameObject Attribute \
 		Event Listener \
+		Sprite \
 		Shape Point
 
 _OBJ = main $(_DEPS)

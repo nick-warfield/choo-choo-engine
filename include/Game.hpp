@@ -1,6 +1,7 @@
 #ifndef GAME_HPP_INCLUDED
 #define GAME_HPP_INCLUDED
 
+#include <vector>
 #include <memory>
 #include <SFML/Window.hpp>
 
@@ -14,6 +15,7 @@ class Game
 		bool loop(void);
 		void close(void);
 		void addListener(Listener);
+		void addListener(std::vector<Listener>);
 
 	private:
 		sf::Window m_window;
@@ -21,6 +23,7 @@ class Game
 		
 		//some sort of config file
 		static const int m_frameDuration;	// in milliseconds
+		static const int m_width, m_height;
 };
 
 #endif

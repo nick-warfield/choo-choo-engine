@@ -12,7 +12,7 @@ int main(void)
 {
 	Game game;
 	GameObject go("stuff");
-	game.addListener(go.GetListener());
+	game.addListener(go.GetListeners());
 	while (game.loop()) { }
 	game.close();
 
