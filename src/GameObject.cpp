@@ -19,5 +19,6 @@ std::vector<Listener> GameObject::GetListeners(void)
 {
 	return m_listeners;
 }
+std::string GameObject::GetName(void) { return m_name; }
 
 void GameObject::onTurn(void) { }

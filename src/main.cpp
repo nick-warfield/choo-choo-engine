@@ -4,15 +4,15 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Event.hpp"
-#include "Listener.hpp"
-#include "GameObject.hpp"
+#include "Game.hpp"
+#include "Sprite.hpp"
 
 int main(void)
 {
 	Game game;
-	GameObject go("stuff");
-	game.addListener(go.GetListeners());
+	Sprite sprite;
+	game.addListener(sprite.GetListeners());
+	sprite.Play();
 	while (game.loop()) { }
 	game.close();
 

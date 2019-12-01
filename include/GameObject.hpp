@@ -16,7 +16,9 @@ class GameObject
 		GameObject(std::string,
 				const std::vector<std::function<void()>>&
 					= std::vector<std::function<void()>>()); 
+
 		std::vector<Listener> GetListeners(void);
+		std::string GetName(void);
 
 	protected:
 		virtual void onTurn(void);
