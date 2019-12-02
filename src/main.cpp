@@ -10,7 +10,7 @@
 int main(void)
 {
 	Game game;
-	Sprite sprite;
+	Sprite sprite(game.window());
 	game.addListener(sprite.GetListeners());
 	sprite.Play();
 	while (game.loop()) { }

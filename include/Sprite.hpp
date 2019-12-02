@@ -14,9 +14,9 @@
 class Sprite : public GameObject
 {
 	public:
-		Sprite(void);
+		Sprite(sf::RenderWindow*);
 		// take image, convert to greyscale and extract palette
-		Sprite(sf::Image, sf::Vector2<int>, int, int);
+		Sprite(sf::RenderWindow*, sf::Image, sf::Vector2<int>, int, int);
 		// Sprite(..pathToFile..)	// load existing sprite file
 		// need copy constructor
 		void Play(void);
@@ -26,7 +26,7 @@ class Sprite : public GameObject
 		bool isPlaying(void);
 
 	protected:
-		virtual void onRender(void);
+		virtual void onRender(sf::RenderWindow*);
 
 	private:
 		bool m_isPlaying;
@@ -34,7 +34,7 @@ class Sprite : public GameObject
 		float m_currentFrame;
 		std::chrono::time_point<std::chrono::system_clock> m_timestamp;
 		sf::Rect<int> m_frame;
-		std::shared_ptr<sf::Texture> m_spriteSheet;
+		sf::Texture m_spriteSheet;
 		std::vector<sf::Color> m_palette;
 		sf::Vector2<double> m_position;
 

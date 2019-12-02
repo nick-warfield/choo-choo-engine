@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "Event.hpp"
 #include "Listener.hpp"
@@ -16,9 +17,10 @@ class Game
 		void close(void);
 		void addListener(Listener);
 		void addListener(std::vector<Listener>);
+		sf::RenderWindow* window(void);
 
 	private:
-		sf::Window m_window;
+		sf::RenderWindow m_window;
 		Event m_frameEvent;
 		
 		//some sort of config file
