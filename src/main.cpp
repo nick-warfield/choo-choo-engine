@@ -10,9 +10,7 @@
 int main(void)
 {
 	Game game;
-	Sprite sprite(game.window());
-	game.addListener(sprite.GetListeners());
-	sprite.Play();
+	game.addObject(std::make_unique<Sprite>());
 	while (game.loop()) { }
 	game.close();
 

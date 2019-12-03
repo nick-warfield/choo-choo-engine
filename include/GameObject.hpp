@@ -6,19 +6,21 @@
 #include <functional>
 #include <vector>
 
-#include "Game.hpp"
+#include <SFML/Graphics.hpp>
+
 #include "Listener.hpp"
 
-class GameObject
+class GameObject : public sf::Drawable
 {
 	public:
 		GameObject(std::string, const std::function<void()>&);
-		GameObject(std::string,
+		GameObject(std::string = "Unnamed",
 				const std::vector<std::function<void()>>&
 					= std::vector<std::function<void()>>()); 
 
 		std::vector<Listener> GetListeners(void);
-		std::string GetName(void);
+		std::string name(void) const;
+		virtual void update(const float&);
 
 	protected:
 		virtual void onTurn(void);
