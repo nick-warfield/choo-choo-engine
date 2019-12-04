@@ -39,7 +39,8 @@ bool Game::loop()
 {
 	auto now = std::chrono::system_clock::now();
 	auto nextFrame = now + std::chrono::milliseconds(m_frameDuration);
-	auto delta = std::chrono::duration<float>(now - m_oldTime);
+	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>
+				(std::chrono::duration<float>(now - m_oldTime));
 	m_oldTime = now;
 
 	// get inputs

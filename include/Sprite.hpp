@@ -16,7 +16,7 @@ class Sprite : public GameObject
 	public:
 		Sprite();
 		// take image, convert to greyscale and extract palette
-		Sprite(sf::Image, sf::Vector2<int>, int, int, float = 1);
+		Sprite(sf::Vector2<int>, int, int, float = 1);
 		// Sprite(..pathToFile..)	// load existing sprite file
 		// need copy constructor
 		void play(void);

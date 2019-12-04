@@ -10,7 +10,11 @@
 int main(void)
 {
 	Game game;
-	game.addObject(std::make_unique<Sprite>());
+	game.addObject(std::make_unique<Sprite>(
+				sf::Vector2<int>(24, 24),
+				2,
+				2,
+				6));
 	while (game.loop()) { }
 	game.close();
 
