@@ -11,9 +11,9 @@ int main(void)
 {
 	Game game;
 	game.addObject(std::make_unique<Sprite>(
-				sf::Vector2<int>(24, 24),
+				"resources/Phalanx.png",
 				2,
-				2,
+				1.5,
 				6));
 	while (game.loop()) { }
 	game.close();

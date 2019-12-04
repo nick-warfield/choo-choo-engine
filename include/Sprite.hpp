@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <chrono>
+#include <string>
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -14,9 +15,8 @@
 class Sprite : public GameObject
 {
 	public:
-		Sprite();
 		// take image, convert to greyscale and extract palette
-		Sprite(sf::Vector2<int>, int, int, float = 1);
+		Sprite(const std::string&, int, float = 15, float = 1);
 		// Sprite(..pathToFile..)	// load existing sprite file
 		// need copy constructor
 		void play(void);
@@ -35,10 +35,10 @@ class Sprite : public GameObject
 		int m_currentFrame;
 		float m_timer;
 		const float m_scale;
-		sf::Rect<int> m_frame;
+		sf::Rect<uint> m_frame;
 		sf::Texture m_spriteSheet;
 		std::vector<sf::Color> m_palette;
-		sf::Vector2<double> m_position;
+		sf::Vector2<float> m_position;
 
 		void resetTimer(void);
 };

@@ -1,33 +1,23 @@
 #include "Sprite.hpp"
 
-Sprite::Sprite()
-: GameObject("Sprite"),
-	m_isPlaying(true),
-	m_frameDuration(1000.0f / 15.0f),
-	m_frameCount(1),
-	m_currentFrame(0),
-	m_timer(m_frameDuration),
-	m_scale(1),
-	m_frame(0, 0, 16, 16)
-	{
-		m_spriteSheet.loadFromFile("resources/Phalanx.png");
-	}
 Sprite::Sprite(
-	sf::Vector2<int> SpriteSize,
-	int FrameCount,
-	int FrameRate,
-	float Scale)
-: GameObject("Sprite"),
+		const std::string& Path,
+		int FrameCount,
+		float FrameRate,
+		float Scale) :
+	GameObject("Sprite"),
 	m_isPlaying(true),
 	m_frameDuration(1000.0f / FrameRate),
 	m_frameCount(FrameCount),
 	m_currentFrame(0),
 	m_timer(m_frameDuration),
 	m_scale(Scale),
-	m_frame(sf::Vector2<int>(0, 0), SpriteSize)
-	{
-		m_spriteSheet.loadFromFile("resources/Phalanx.png");
-	}
+	m_position(1920 / 2, 1080 / 2)
+{
+	m_spriteSheet.loadFromFile(Path);
+	m_frame = sf::Rect<uint>(sf::Vector2<uint>(0, 0), m_spriteSheet.getSize());
+	m_frame.width /= m_frameCount;
+}
 
 bool Sprite::isPlaying(void) const { return m_isPlaying; }
 void Sprite::play(void) { m_isPlaying = true; }
@@ -40,7 +30,7 @@ void Sprite::stop(void)
 void Sprite::restart(void)
 {
 	m_currentFrame = 0;
-	m_frame = sf::Rect<int>(
+	m_frame = sf::Rect<uint>(
 			0,
 			0,
 			m_frame.width,
@@ -58,7 +48,7 @@ void Sprite::update(const float& delta)
 	
 	++m_currentFrame;
 	if (m_currentFrame >= m_frameCount) { m_currentFrame = 0; }
-	m_frame = sf::Rect<int>(
+	m_frame = sf::Rect<uint>(
 			m_frame.width * m_currentFrame,
 			0,
 			m_frame.width,
@@ -68,9 +58,9 @@ void Sprite::update(const float& delta)
 
 void Sprite::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	sf::Sprite spr(m_spriteSheet, m_frame);
+	sf::Sprite spr(m_spriteSheet, sf::Rect<int>(m_frame));
 	spr.scale(m_scale, m_scale);
-	spr.setPosition(1920 / 2, 1080 / 2);
+	spr.setPosition(m_position);
 	target.draw(spr);
 }
 
