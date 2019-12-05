@@ -6,6 +6,7 @@
 #include <chrono>
 #include <string>
 #include <functional>
+#include <algorithm>
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -25,13 +26,12 @@ class Sprite : public GameObject
 		void stop(void);
 		void restart(void);
 		bool isPlaying(void) const;
-		bool inPalette(const sf::Color&);
+		bool inPalette(const sf::Color&) const;
 		std::vector<sf::Color> palette(void);
 
 		void update(const float&);
 		void draw(sf::RenderTarget&,
 				sf::RenderStates = sf::RenderStates::Default) const;
-		sf::Texture init(const std::string&);
 
 	private:
 		bool m_isPlaying;
@@ -39,13 +39,19 @@ class Sprite : public GameObject
 		int m_currentFrame;
 		float m_timer;
 		const float m_scale;
+
+		sf::Image m_spriteSheet;
+		sf::Texture m_texture;
 		sf::Rect<uint> m_frame;
-		sf::Texture m_spriteSheet;
 		std::vector<sf::Color> m_palette;
+
 		sf::Vector2<float> m_position;
 
 		void resetTimer(void);
-		void forEachPixel(sf::Image&, std::function<sf::Color(sf::Color)>);
+		void forEachPixel(std::function<void(sf::Color)>) const;
+		void forEachPixel(std::function<sf::Color(sf::Color)>);
+		void reloadTexture(void);
+		sf::Color colorMap(const sf::Color&);
 };
 
 #endif
