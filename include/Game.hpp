@@ -20,9 +20,9 @@ class Game
 		void addListener(Listener);
 		void addListener(std::vector<Listener>);
 		void addObject(std::unique_ptr<GameObject>);
+		sf::RenderWindow m_window;
 
 	private:
-		sf::RenderWindow m_window;
 		Event m_frameEvent;
 		std::vector<std::unique_ptr<GameObject>> m_objects;
 		std::chrono::time_point<std::chrono::system_clock> m_oldTime;

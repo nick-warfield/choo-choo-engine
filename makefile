@@ -14,7 +14,8 @@ CFLAGS = -std=c++17 -I$(IDIR)
 _DEPS = Game GameException GameObject Attribute \
 		Event Listener \
 		Sprite \
-		Shape Point
+		Shape Point \
+		PhalanxDemo
 
 _OBJ = main $(_DEPS)
 

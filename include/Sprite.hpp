@@ -27,7 +27,9 @@ class Sprite : public GameObject
 		void restart(void);
 		bool isPlaying(void) const;
 		bool inPalette(const sf::Color&) const;
-		std::vector<sf::Color> palette(void);
+		std::vector<sf::Color> getPalette(void) const;
+		void setPalette(std::vector<sf::Color>);
+		bool timeout(void) const;
 
 		void update(const float&);
 		void draw(sf::RenderTarget&,

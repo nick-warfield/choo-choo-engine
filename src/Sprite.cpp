@@ -64,7 +64,7 @@ void Sprite::update(const float& delta)
 		m_timer -= delta;
 		return;
 	}
-	
+
 	++m_currentFrame;
 	if (m_currentFrame >= m_frameCount) { m_currentFrame = 0; }
 	m_frame = sf::Rect<uint>(
@@ -122,6 +122,17 @@ void Sprite::reloadTexture(void)
 	m_texture.update(img);
 }
 
+std::vector<sf::Color> Sprite::getPalette(void) const
+{
+	return m_palette;
+}
+void Sprite::setPalette(std::vector<sf::Color> palette)
+{
+	if (palette.size() != m_palette.size()) { return; }
+	m_palette = palette;
+	reloadTexture();
+}
+
 sf::Color Sprite::colorMap(const sf::Color& grey)
 {
 	int index = grey.r / (256 / m_palette.size());
@@ -134,4 +145,5 @@ bool Sprite::inPalette(const sf::Color& color) const
 			[color](auto c) { return c == color; } );
 }
 
+bool Sprite::timeout(void) const { return m_timer <= 0; }
 void Sprite::resetTimer(void) { m_timer = m_frameDuration; }
