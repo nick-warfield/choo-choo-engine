@@ -15,7 +15,7 @@ _DEPS = Game GameException GameObject Attribute \
 		Event Listener \
 		Sprite \
 		Shape Point \
-		PhalanxDemo
+		PhalanxDemo TerrainDemo
 
 _OBJ = main $(_DEPS)
 

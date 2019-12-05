@@ -30,6 +30,7 @@ class Sprite : public GameObject
 		std::vector<sf::Color> getPalette(void) const;
 		void setPalette(std::vector<sf::Color>);
 		bool timeout(void) const;
+		void setPosition(float, float);
 
 		void update(const float&);
 		void draw(sf::RenderTarget&,

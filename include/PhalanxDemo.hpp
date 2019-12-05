@@ -1,3 +1,6 @@
+#ifndef PHALANXDEMO_HPP_INCLUDED
+#define PHALANXDEMO_HPP_INCLUDED
+
 #include "Sprite.hpp"
 
 class PhalanxDemo : public Sprite
@@ -6,3 +9,5 @@ class PhalanxDemo : public Sprite
 		PhalanxDemo(void);
 		void update(const float&);
 };
+
+#endif

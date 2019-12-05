@@ -1,7 +1,7 @@
 #include "PhalanxDemo.hpp"
 
 PhalanxDemo::PhalanxDemo(void) :
-	Sprite("resources/Phalanx.png", 2, 1.5, 6) { }
+	Sprite("resources/Phalanx.png", 2, 1.5, 10) { setPosition(650, 425); }
 
 void PhalanxDemo::update(const float& delta)
 {

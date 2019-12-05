@@ -13,7 +13,7 @@ Sprite::Sprite(
 	m_timer(m_frameDuration),
 	m_scale(Scale),
 	m_palette(),
-	m_position(1920 / 2, 1080 / 2)
+	m_position(300, 425)
 {
 	m_spriteSheet.loadFromFile(Path);
 
@@ -57,9 +57,14 @@ void Sprite::restart(void)
 	resetTimer();
 }
 
+void Sprite::setPosition(float x, float y)
+{
+	m_position = sf::Vector2f(x, y);
+}
+
 void Sprite::update(const float& delta)
 {
-	if (m_timer > 0 || !isPlaying())
+	if (!timeout() || !isPlaying())
 	{
 		m_timer -= delta;
 		return;

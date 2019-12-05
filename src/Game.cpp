@@ -52,7 +52,7 @@ bool Game::loop()
 	for (auto& obj : m_objects) { obj->update(delta.count()); }
 	
 	// render
-	m_window.clear();
+	m_window.clear(sf::Color(53, 64, 10));
 	for (auto& obj : m_objects) { m_window.draw(*obj); }
 	m_window.display();
 
