@@ -12,8 +12,8 @@ CC = g++
 CFLAGS = -std=c++17 -I$(IDIR)
 
 _DEPS = Game GameException GameObject Attribute \
-		Event Listener \
-		Sprite \
+		Event Listener Timer\
+		Sprite AnimatedSprite\
 		Shape Point \
 		PhalanxDemo TerrainDemo
 

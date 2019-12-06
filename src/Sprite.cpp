@@ -82,6 +82,7 @@ void Sprite::update(const float& delta)
 
 void Sprite::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	// I should recolor with a shader insetead
 	sf::Sprite spr(m_texture, sf::Rect<int>(m_frame));
 	spr.scale(m_scale, m_scale);
 	spr.setPosition(m_position);
