@@ -1,5 +1,11 @@
 #include "Timer.hpp"
 
+Timer::Timer(const Timer& other) :
+	m_duration(other.m_duration),
+	m_time(other.m_time),
+	m_isPlaying(other.m_isPlaying),
+	m_func(other.m_func) { }
+
 Timer::Timer(float duration, std::function<void()> function) :
 	m_duration(duration),
 	m_time(duration),

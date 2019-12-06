@@ -7,6 +7,7 @@
 class Timer : public GameObject
 {
 	public:
+		Timer(const Timer&);
 		Timer(float, std::function<void()> = std::function<void()>());
 		void update(const float&);
 		void draw(sf::RenderTarget&, sf::RenderStates) const;
