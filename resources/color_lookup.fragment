@@ -1,0 +1,9 @@
+# version 120
+
+uniform sampler2D palette;
+uniform sampler2D tex;
+
+void main()
+{
+	gl_FragColor = texture2D(palette, vec2(texture2D(tex, gl_TexCoord[0].xy).r, 0));
+}

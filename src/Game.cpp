@@ -8,17 +8,17 @@
 #include "Game.hpp"
 
 const int Game::m_frameDuration = 16;
+const int Game::m_width = 1920;
+const int Game::m_height = 1080;
 
-Game::Game()
+Game::Game() : m_objects(), m_oldTime(std::chrono::system_clock::now())
 {
-	m_window.create(sf::VideoMode(1, 1), "game window");
+	m_window.create(sf::VideoMode(m_width, m_height), "game window");
 	auto dt = sf::VideoMode::getDesktopMode();
 
-	m_window.setSize(sf::Vector2u(dt.width * 3 / 5, dt.height * 3 / 5));
 	m_window.setPosition(sf::Vector2i(dt.width / 2 - m_window.getSize().x / 2, 
 				dt.height / 2 - m_window.getSize().y / 2));
 	m_window.setVerticalSyncEnabled(true);
-	m_window.setSize(sf::Vector2u(m_window.getSize().x, m_window.getSize().y));
 	m_window.setActive(true);
 }
 
@@ -26,11 +26,22 @@ void Game::addListener(Listener List)
 {
 	m_frameEvent += List;
 }
+void Game::addListener(std::vector<Listener> Listeners)
+{
+	for (auto l : Listeners) { addListener(l); }
+}
+void Game::addObject(std::unique_ptr<GameObject> obj)
+{
+	m_objects.push_back(std::move(obj));
+}
 
 bool Game::loop()
 {
-	auto nextFrame = std::chrono::system_clock::now() +
-		std::chrono::milliseconds(m_frameDuration);
+	auto now = std::chrono::system_clock::now();
+	auto nextFrame = now + std::chrono::milliseconds(m_frameDuration);
+	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>
+				(std::chrono::duration<float>(now - m_oldTime));
+	m_oldTime = now;
 
 	// get inputs
 	sf::Event event;
@@ -38,13 +49,14 @@ bool Game::loop()
 	{
 		if (event.type == sf::Event::Closed) { return false; }
 	}
-
-	m_frameEvent();
-	std::this_thread::sleep_until(nextFrame);
+	for (auto& obj : m_objects) { obj->update(delta.count()); }
 	
 	// render
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_window.clear(sf::Color(43, 34, 0));
+	for (auto& obj : m_objects) { m_window.draw(*obj); }
 	m_window.display();
+
+	std::this_thread::sleep_until(nextFrame);
 
 	return true;
 }

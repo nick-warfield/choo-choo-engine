@@ -4,27 +4,30 @@
 #include <iostream>
 #include <string>
 #include <functional>
+#include <vector>
 
-#include "Game.hpp"
+#include <SFML/Graphics.hpp>
+
 #include "Listener.hpp"
 
-class GameObject
+class GameObject : public sf::Drawable
 {
 	public:
-		GameObject(std::string Name) :
-			m_name(Name), m_turnUpdate(std::bind(&GameObject::onTurn, this)) { }
+		GameObject(std::string, const std::function<void()>&);
+		GameObject(std::string = "Unnamed",
+				const std::vector<std::function<void()>>&
+					= std::vector<std::function<void()>>()); 
 
-		Listener GetListener(void) { return m_turnUpdate; }
+		std::vector<Listener> GetListeners(void);
+		std::string name(void) const;
+		virtual void update(const float&);
 
 	protected:
-		void onTurn(void)
-		{
-			std::cout << m_name << " started their turn!\n";
-		}
+		virtual void onTurn(void);
 
 	private:
 		std::string m_name;
-		Listener m_turnUpdate;
+		std::vector<Listener> m_listeners;
 };
 
 #endif
