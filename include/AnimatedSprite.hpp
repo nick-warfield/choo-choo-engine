@@ -39,6 +39,8 @@ class AnimatedSprite : public GameObject
 		float getRotation(void) const;
 		const sf::Vector2f& getScale(void) const;
 
+		void setPalette(std::shared_ptr<sf::Texture>);
+
 	private:
 		int m_currentFrame;
 		const int m_frameDuration, m_frameCount;

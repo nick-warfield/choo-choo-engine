@@ -7,7 +7,7 @@ AnimatedSprite::AnimatedSprite(const AnimatedSprite& other) :
 	m_frameDuration(other.m_frameDuration),
 	m_frameCount(other.m_frameCount),
 	m_frame(other.m_frame),
-	m_timer(other.m_timer),
+	m_timer(m_frameDuration, [this]() { nextFrame(); }),
 	m_tex(other.m_tex),
 	m_palette(other.m_palette),
 	m_colorLookup(other.m_colorLookup) { }
@@ -98,6 +98,12 @@ void AnimatedSprite::setScale(float x, float y) { m_frame.setScale(x, y); }
 const sf::Vector2f& AnimatedSprite::getPosition(void) const { return m_frame.getPosition(); }
 float AnimatedSprite::getRotation(void) const { return m_frame.getRotation(); }
 const sf::Vector2f& AnimatedSprite::getScale(void) const { return m_frame.getScale(); }
+
+void AnimatedSprite::setPalette(std::shared_ptr<sf::Texture> palette)
+{
+	m_palette = palette;
+	m_colorLookup->setUniform("palette", *m_palette);
+}
 
 void AnimatedSprite::setFrame(int frame)
 {

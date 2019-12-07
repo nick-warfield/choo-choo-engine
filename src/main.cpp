@@ -12,13 +12,26 @@
 int main(void)
 {
 	Game game;
-	game.addObject(std::make_unique<AnimatedSprite>(
-				"Phalanx",
-				"resources/Phalanx.png",
-				2,
-				1.5));
-	game.addObject(std::make_unique<PhalanxDemo>());
-	game.addObject(std::make_unique<TerrainDemo>());
+	AnimatedSprite spr1("Phalanx", "resources/Phalanx.png", 2, 1.5);
+	spr1.setScale(10, 10);
+	spr1.setPosition(250, 425);
+
+	auto spr2 = spr1;
+	spr2.setPosition(600, 425);
+	sf::Texture red;
+	red.loadFromFile("resources/Phalanx_palette_red.png");
+	spr2.setPalette(std::make_shared<sf::Texture>(red));
+
+	auto spr3 = spr1;
+	spr3.setPosition(950, 425);
+	sf::Texture green;
+	green.loadFromFile("resources/Phalanx_palette_green.png");
+	//spr3.setPalette(std::make_shared<sf::Texture>(green));
+
+	game.addObject(std::make_unique<AnimatedSprite>(spr1));
+	game.addObject(std::make_unique<AnimatedSprite>(spr2));
+	game.addObject(std::make_unique<AnimatedSprite>(spr3));
+
 	while (game.loop()) { }
 	game.close();
 
