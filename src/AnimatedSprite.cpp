@@ -48,7 +48,7 @@ AnimatedSprite::AnimatedSprite(
 	m_palette->loadFromImage(palImg);
 
 	// convert image to greyscale
-	uint gap = 256 / pal.size(), mapping = 0;
+	float gap = 256.0f / (pal.size() - 1), mapping = 0;
 	for (auto color : pal)
 	{
 		sf::Color grey(mapping, mapping, mapping, color.a);
@@ -64,8 +64,9 @@ AnimatedSprite::AnimatedSprite(
 	m_frame.setTexture(*m_tex);
 	m_frame.setTextureRect(sf::Rect<int>(0, 0, img.getSize().x / m_frameCount, img.getSize().y));
 
-	m_colorLookup->loadFromFile("resources/color_lookup.glsl", sf::Shader::Type::Fragment);
-	// set uniforms and all that
+	m_colorLookup->loadFromFile("resources/color_lookup.fragment", sf::Shader::Fragment);
+	m_colorLookup->setUniform("tex", *m_tex);
+	m_colorLookup->setUniform("palette", *m_palette);
 
 	m_frame.setPosition(250, 425);
 	m_frame.setScale(10, 10);
@@ -85,6 +86,7 @@ void AnimatedSprite::draw(
 		sf::RenderTarget& target,
 		sf::RenderStates states) const
 {
+	states.shader = m_colorLookup.get();
 	target.draw(m_frame, states);
 }
 
