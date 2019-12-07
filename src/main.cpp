@@ -20,17 +20,22 @@ int main(void)
 	spr2.setPosition(600, 425);
 	sf::Texture red;
 	red.loadFromFile("resources/Phalanx_palette_red.png");
-	spr2.setPalette(std::make_shared<sf::Texture>(red));
+	spr2.setPalette(red);
 
 	auto spr3 = spr1;
 	spr3.setPosition(950, 425);
 	sf::Texture green;
 	green.loadFromFile("resources/Phalanx_palette_green.png");
-	//spr3.setPalette(std::make_shared<sf::Texture>(green));
+	spr3.setPalette(green);
+
+	AnimatedSprite spr4("Forest", "resources/Forest.png", 1, 1);
+	spr4.setScale(10, 10);
+	spr4.setPosition(1400, 475);
 
 	game.addObject(std::make_unique<AnimatedSprite>(spr1));
 	game.addObject(std::make_unique<AnimatedSprite>(spr2));
 	game.addObject(std::make_unique<AnimatedSprite>(spr3));
+	game.addObject(std::make_unique<AnimatedSprite>(spr4));
 
 	while (game.loop()) { }
 	game.close();

@@ -24,7 +24,7 @@ AnimatedSprite::AnimatedSprite(
 	m_frame(),
 	m_timer(m_frameDuration, [this]() { nextFrame(); }),
 	m_tex(std::make_shared<sf::Texture>()),
-	m_palette(std::make_shared<sf::Texture>()),
+	m_palette(),
 	m_colorLookup(std::make_shared<sf::Shader>())
 {
 	std::vector<sf::Color> pal;
@@ -45,7 +45,7 @@ AnimatedSprite::AnimatedSprite(
 	sf::Image palImg;
 	palImg.create(pal.size(), 1);
 	for (uint i = 0; i < pal.size(); ++i) { palImg.setPixel(i, 0, pal[i]); }
-	m_palette->loadFromImage(palImg);
+	m_palette.loadFromImage(palImg);
 
 	// convert image to greyscale
 	float gap = 256.0f / (pal.size() - 1), mapping = 0;
@@ -66,7 +66,7 @@ AnimatedSprite::AnimatedSprite(
 
 	m_colorLookup->loadFromFile("resources/color_lookup.fragment", sf::Shader::Fragment);
 	m_colorLookup->setUniform("tex", *m_tex);
-	m_colorLookup->setUniform("palette", *m_palette);
+	m_colorLookup->setUniform("palette", m_palette);
 
 	m_frame.setPosition(250, 425);
 	m_frame.setScale(10, 10);
@@ -86,6 +86,7 @@ void AnimatedSprite::draw(
 		sf::RenderTarget& target,
 		sf::RenderStates states) const
 {
+	m_colorLookup->setUniform("palette", m_palette);
 	states.shader = m_colorLookup.get();
 	target.draw(m_frame, states);
 }
@@ -99,10 +100,10 @@ const sf::Vector2f& AnimatedSprite::getPosition(void) const { return m_frame.get
 float AnimatedSprite::getRotation(void) const { return m_frame.getRotation(); }
 const sf::Vector2f& AnimatedSprite::getScale(void) const { return m_frame.getScale(); }
 
-void AnimatedSprite::setPalette(std::shared_ptr<sf::Texture> palette)
+void AnimatedSprite::setPalette(sf::Texture palette)
 {
 	m_palette = palette;
-	m_colorLookup->setUniform("palette", *m_palette);
+	m_colorLookup->setUniform("palette", m_palette);
 }
 
 void AnimatedSprite::setFrame(int frame)
